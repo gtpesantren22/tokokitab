@@ -64,10 +64,10 @@ if (isset($_POST['simpan'])) {
     $sql = mysqli_query($conn, "INSERT INTO kolakan VALUES('','$kd_kolakan','$jml_kolakan','$total','$tanggal')");
     if ($sql) {
 ?>
-        <script type="text/javascript">
-            alert("Data Berhasil Di Simpan");
-            window.location.href = "kolakan.php";
-        </script>
+<script type="text/javascript">
+alert("Data Berhasil Di Simpan");
+window.location.href = "detail_kolakan.php?kd=<?= $kd_kolakan ?>";
+</script>
 <?php
     }
 }

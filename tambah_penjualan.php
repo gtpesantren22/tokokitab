@@ -36,7 +36,8 @@ $kodepj = 'PJ-' . $tgl . '.' . $mou . '.' . rand(0, 999999);
 
                         <div class="form-group">
                             <label>Kode Jual</label>
-                            <input class="form-control select2_demo_1" name="kd_jual" type="text" value="<?= $kodepj; ?>" readonly>
+                            <input class="form-control select2_demo_1" name="kd_jual" type="text"
+                                value="<?= $kodepj; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Select</label>
@@ -45,7 +46,7 @@ $kodepj = 'PJ-' . $tgl . '.' . $mou . '.' . rand(0, 999999);
                                 <?php
                                 $sn = mysqli_query($conn, "SELECT * FROM tb_santri");
                                 while ($a = mysqli_fetch_assoc($sn)) { ?>
-                                    <option value="<?= $a['nis'] ?>"><?= $a['nis'] . ' - ' . $a['nama'] ?></option>
+                                <option value="<?= $a['nis'] ?>"><?= $a['nis'] . ' - ' . $a['nama'] ?></option>
                                 <?php } ?> ?>
                             </select>
                         </div>
@@ -79,10 +80,10 @@ if (isset($_POST['simpan'])) {
     $sql = mysqli_query($conn, "INSERT INTO penjualan VALUES('','$kd_jual','$nis','$tanggal','$jml_jual','$total','$bayar','$kembali')");
     if ($sql) {
 ?>
-        <script type="text/javascript">
-            alert("Data Berhasil Di Simpan");
-            window.location.href = "penjualan.php";
-        </script>
+<script type="text/javascript">
+alert("Data Berhasil Di Simpan");
+window.location.href = "detail_penjualan.php?kd=<?= $kd_jual ?>";
+</script>
 <?php
     }
 }
