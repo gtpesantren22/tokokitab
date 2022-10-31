@@ -12,11 +12,11 @@
     <div class="ibox">
         <div class="ibox-head">
             <div class="ibox-title">Data Santi</div>
-            <a href="tambah_kitab.php" class="btn btn-primary  btn-rounded pull-right"><i class="fa ti-plus"> Tambah Santri</i></a>
         </div>
         <div class="ibox-body">
             <br>
-            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0"
+                width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -33,21 +33,21 @@
                     <?php
                     $no = 1;
                     include 'koneksi.php';
-                    $sql = mysqli_query($conn, "SELECT * FROM tb_santri");
+                    $sql = mysqli_query($conn, "SELECT * FROM tb_santri WHERE aktif = 'Y' ");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
-                        <tr>
-                            <td><?= $no++; ?></td>
-                            <td><?= $data['nis']; ?></td>
-                            <td><?= $data['nama']; ?></td>
-                            <td><?= $data['desa']; ?> - <?= $data['kec']; ?></td>
-                            <td><?= $data['k_formal']; ?> - <?= $data['t_formal']; ?></td>
-                            <td><?= $data['kamar']; ?> - <?= $data['komplek']; ?></td>
-                            <td>
-                                <!-- <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning "><i class="fa fa-pencil"></i></a>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $data['nis']; ?></td>
+                        <td><?= $data['nama']; ?></td>
+                        <td><?= $data['desa']; ?> - <?= $data['kec']; ?></td>
+                        <td><?= $data['k_formal']; ?> - <?= $data['t_formal']; ?></td>
+                        <td><?= $data['kamar']; ?> - <?= $data['komplek']; ?></td>
+                        <td>
+                            <!-- <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning "><i class="fa fa-pencil"></i></a>
                                 <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger "><i class="fa fa-times"></i></a> -->
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     <?php } ?>
                 </tbody>
             </table>

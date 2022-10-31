@@ -4,11 +4,13 @@
     <div class="ibox">
         <div class="ibox-head">
             <div class="ibox-title">Data Modal</div>
-            <button type="button" class="btn btn-primary  btn-rounded pull-right" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa ti-plus"> Tambah Modal</i></button>
+            <button type="button" class="btn btn-primary  btn-rounded pull-right" data-toggle="modal"
+                data-target=".bd-example-modal-lg"><i class="fa ti-plus"> Tambah Modal</i></button>
         </div>
         <div class="ibox-body">
             <br>
-            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0"
+                width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -27,17 +29,20 @@
                     $sql = mysqli_query($conn, "SELECT * FROM modal");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
-                        <tr>
-                            <td><?= $no++; ?></td>
-                            <td><?= $data['kode']; ?></td>
-                            <td><?= $data['nama']; ?></td>
-                            <td><?= $data['sumber']; ?></td>
-                            <td><?= rupiah($data['nominal']); ?></td>
-                            <td>
-                                <a href="modal_rinci.php?id=<?= $data['id_modal']; ?>" class="btn btn-info btn-sm"><i class="fa fa-line-chart"></i></a>
-                                <a href="<?= 'hapus_modal.php?id=' . $data['kode'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= $data['kode']; ?></td>
+                        <td><?= $data['nama']; ?></td>
+                        <td><?= $data['sumber']; ?></td>
+                        <td><?= rupiah($data['nominal']); ?></td>
+                        <td>
+                            <a href="modal_rinci.php?id=<?= $data['kode']; ?>" class="btn btn-info btn-sm"><i
+                                    class="fa fa-line-chart"></i></a>
+                            <a href="<?= 'hapus_modal.php?id=' . $data['kode'] ?>"
+                                onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger btn-sm"><i
+                                    class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
                     <?php } ?>
                 </tbody>
             </table>
@@ -45,7 +50,8 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -66,7 +72,8 @@
                         <input type="text" name="nominal" id="" class="form-control uang" required>
                     </div>
                     <div class="form-group">
-                        <button type="submit" name="save" class="btn btn-success"><i class="fa fa-check"></i> Simpan</button>
+                        <button type="submit" name="save" class="btn btn-success"><i class="fa fa-check"></i>
+                            Simpan</button>
                     </div>
 
                 </form>
