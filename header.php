@@ -22,7 +22,7 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Toko Kitab - PPDWK</title>
+    <title>Unit Usaha - PPDWK</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -42,11 +42,11 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
         <!-- START HEADER-->
         <header class="header">
             <div class="page-brand">
-                <a class="link" href="index.html">
-                    <span class="brand">Toko
-                        <span class="brand-tip">Kitab</span>
+                <a class="link" href="index.php">
+                    <span class="brand">Unit
+                        <span class="brand-tip">Usaha</span>
                     </span>
-                    <span class="brand-mini">TK</span>
+                    <span class="brand-mini">UU</span>
                 </a>
             </div>
             <div class="flexbox flex-1">
@@ -98,27 +98,39 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                 </div>
                 <ul class="side-menu metismenu">
                     <li>
-                        <a class="active" href="media.php"><i class="sidebar-item-icon fa fa-th-large"></i>
+                        <a class="active" href="index.php"><i class="sidebar-item-icon fa fa-th-large"></i>
                             <span class="nav-label">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="heading">PAGES</li>
                     <li>
-                        <a href="admin.php"><i class="sidebar-item-icon fa fa-user"></i>
-                            <span class="nav-label">Data Admin</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="santri.php"><i class="sidebar-item-icon fa fa-users"></i>
-                            <span class="nav-label">Data Santri</span>
-                        </a>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-industry"></i>
+                            <span class="nav-label">Master Data</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <a href="admin.php">Data Admin</a>
+                            </li>
+                            <li>
+                                <a href="santri.php">Data Santri</a>
+                            </li>
+                            <li>
+                                <a href="kitab.php">Data Barang</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li>
-                        <a href="kitab.php"><i class="sidebar-item-icon fa fa-book"></i>
-                            <span class="nav-label">Data Kitab</span>
-                        </a>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-suitcase"></i>
+                            <span class="nav-label">Modal</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <a href="modal_awal.php">Modal Utama</a>
+                            </li>
+                            <li>
+                                <a href="modal_pecah.php">Modal Pecahan</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li>

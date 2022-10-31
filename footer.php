@@ -31,6 +31,7 @@
 <script src="./assets/vendors/DataTables/datatables.min.js" type="text/javascript"></script>
 <script src="./assets/vendors/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
 <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
+<script src="assets/js/jquery.mask.min.js"></script>
 <script type="text/javascript">
     $(function() {
         $('#selectExt').select2();
@@ -45,6 +46,15 @@
                 { "data": "salary" }
             ]*/
         });
+    })
+
+    $(document).ready(function() {
+
+        // Format mata uang.
+        $('.uang').mask('0.000.000.000.000', {
+            reverse: true
+        });
+
     })
 </script>
 </body>

@@ -1,18 +1,18 @@
 <?php include 'header.php'; ?>
 <div class="page-heading">
-    <h1 class="page-title">Data Kitab</h1>
+    <h1 class="page-title">Data Barang</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="index.html"><i class="la la-home font-20"></i></a>
         </li>
-        <li class="breadcrumb-item">Data Kitab</li>
+        <li class="breadcrumb-item">Data Barang</li>
     </ol>
 </div>
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
-            <div class="ibox-title">Data Kitab</div>
-            <a href="tambah_kitab.php" class="btn btn-primary  btn-rounded pull-right"><i class="fa ti-plus"> Tambah kitab</i></a>
+            <div class="ibox-title">Data Barang</div>
+            <a href="tambah_kitab.php" class="btn btn-primary  btn-rounded pull-right"><i class="fa ti-plus"> Tambah Barang</i></a>
         </div>
         <div class="ibox-body">
             <br>
@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Kode Kitab</th>
+                        <th>Kode Barang</th>
                         <th>Nama</th>
                         <th>Stok</th>
                         <th>Harga Kolak</th>
