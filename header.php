@@ -134,6 +134,22 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                     </li>
 
                     <li>
+                        <a href="javascript:;"><i class="sidebar-item-icon fa fa-shopping-cart"></i>
+                            <span class="nav-label">Transaksi</span><i class="fa fa-angle-left arrow"></i></a>
+                        <ul class="nav-2-level collapse">
+                            <li>
+                                <a href="masuk.php">Pemasukan</a>
+                            </li>
+                            <li>
+                                <a href="keluar.php">Pengeluaran</a>
+                            </li>
+                            <li>
+                                <a href="jasa.php">Setoran Jasa</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
                         <a href="kolakan.php"><i class="sidebar-item-icon ti-shopping-cart"></i>
                             <span class="nav-label">Kolakan</span>
                         </a>
