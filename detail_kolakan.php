@@ -175,8 +175,9 @@ if (isset($_POST['simpan'])) {
 
     $dtkitab = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kitab WHERE kd_kitab = '$kd_kitab' "));
     $total = $jumlah * $dtkitab['harga_kolak'];
+    $kate = $dtkitab['kategori'];
 
-    $sql = mysqli_query($conn, "INSERT INTO detail_kolakan VALUES('', '$kd_kolakan', '$kd_kitab', '$jumlah', '$total')");
+    $sql = mysqli_query($conn, "INSERT INTO detail_kolakan VALUES('', '$kd_kolakan', '$kd_kitab', '$kate', '$jumlah', '$total')");
 
     $jmlKolak = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(jumlah) AS jmlKitab, SUM(total) AS totHarga FROM detail_kolakan WHERE kd_kolakan = '$kd_kolakan' "));
     $jmlKitab = $jmlKolak['jmlKitab'];

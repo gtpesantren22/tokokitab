@@ -38,17 +38,29 @@ $kodektb = 'KTB-' . rand(0, 999999);
                             <input class="form-control" name="kd_kitab" type="text" value="<?= $kodektb; ?>" readonly>
                         </div>
                         <div class="form-group">
+                            <label for="">Kategori</label>
+                            <select name="kategori" id="" class="form-control" required>
+                                <option value=""> --pilih kategori-- </option>
+                                <?php
+                                $sql = mysqli_query($conn, "SELECT * FROM modal");
+                                foreach ($sql as $ro) :
+                                ?>
+                                    <option value="<?= $ro['kode']; ?>"><?= $ro['kode'] . ' - ' . $ro['nama']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Nama</label>
                             <input class="form-control" name="nama" type="text" placeholder="Masukkan Nama">
                         </div>
 
                         <div class="form-group">
                             <label>Harga Kolak</label>
-                            <input class="form-control" name="harga_kolak" type="text" placeholder="Masukkan Harga Kolak">
+                            <input class="form-control uang" name="harga_kolak" type="text" placeholder="Masukkan Harga Kolak">
                         </div>
                         <div class="form-group">
                             <label>Harga Jual</label>
-                            <input class="form-control" name="harga_jual" type="text" placeholder="Masukkan Harga Jual">
+                            <input class="form-control uang" name="harga_jual" type="text" placeholder="Masukkan Harga Jual">
                         </div>
                         <div class="form-group">
                             <label>Gambar</label>
@@ -74,10 +86,11 @@ if (isset($_POST['simpan'])) {
     $kd_kitab = $_POST['kd_kitab'];
     $nama = $_POST['nama'];
     $stok = $_POST['stok'];
-    $harga_kolak = $_POST['harga_kolak'];
-    $harga_jual = $_POST['harga_jual'];
+    $harga_kolak = preg_replace("/[^0-9]/", "", $_POST['harga_kolak']);
+    $harga_jual = preg_replace("/[^0-9]/", "", $_POST['harga_jual']);
     $gambar = $_POST['gambar'];
-    $sql = mysqli_query($conn, "INSERT INTO kitab VALUES('','$kd_kitab','$nama','$stok','$harga_kolak','$harga_jual','$gambar')");
+    $kategori = $_POST['kategori'];
+    $sql = mysqli_query($conn, "INSERT INTO kitab VALUES('','$kd_kitab', '$kategori', '$nama','$stok','$harga_kolak','$harga_jual','$gambar')");
     if ($sql) {
 ?>
         <script type="text/javascript">

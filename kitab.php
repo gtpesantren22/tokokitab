@@ -25,7 +25,7 @@
                         <th>Stok</th>
                         <th>Harga Kolak</th>
                         <th>Harga Jual</th>
-                        <th>Gambar</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                     <?php
                     $no = 1;
                     include 'koneksi.php';
-                    $sql = mysqli_query($conn, "SELECT * FROM kitab");
+                    $sql = mysqli_query($conn, "SELECT a.*, b.nama as nmMd FROM kitab a JOIN modal b ON a.kategori=b.kode ");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
                         <tr>
@@ -44,7 +44,7 @@
                             <td><?= $data['stok']; ?></td>
                             <td><?= rupiah($data['harga_kolak']); ?></td>
                             <td><?= rupiah($data['harga_jual']); ?></td>
-                            <td><?= $data['gambar']; ?></td>
+                            <td><?= $data['nmMd']; ?></td>
                             <td>
                                 <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning "><i class="fa fa-pencil"></i></a>
                                 <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger "><i class="fa fa-times"></i></a>

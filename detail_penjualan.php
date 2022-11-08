@@ -217,6 +217,7 @@ if (isset($_POST['simpan'])) {
     $dtkitab = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kitab WHERE kd_kitab = '$kd_kitab' "));
     $total = $jumlah * $dtkitab['harga_jual'];
     $stok = $dtkitab['stok'];
+    $kate = $dtkitab['kategori'];
 
     if ($stok < $jumlah) {
         echo "
@@ -226,7 +227,7 @@ if (isset($_POST['simpan'])) {
         </script>
         ";
     } else {
-        $sql = mysqli_query($conn, "INSERT INTO detail_jual VALUES('', '$kd_jual', '$kd_kitab', '$jumlah', '$total')");
+        $sql = mysqli_query($conn, "INSERT INTO detail_jual VALUES('', '$kd_jual', '$kd_kitab', '$kate', '$jumlah', '$total')");
 
         $jmljual = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(jumlah) AS jmlKitab, SUM(total) AS totHarga FROM detail_jual WHERE kd_jual = '$kd_jual' "));
 

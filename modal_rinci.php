@@ -5,6 +5,8 @@ include 'koneksi.php';
 $kd = $_GET['id'];
 $df = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM modal WHERE kode = '$kd' "));
 
+$masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) as jml FROM masuk WHERE kategori = '$kd' "));
+$keluar = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) as jml FROM keluar WHERE kategori = '$kd' "));
 ?>
 
 <div class="page-content fade-in-up">
@@ -30,15 +32,15 @@ $df = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM modal WHERE kode = '
                 <div class="col-lg-3 col-md-6">
                     <div class="ibox bg-success color-white widget-stat">
                         <div class="ibox-body">
-                            <h3 class="m-b-5 font-strong">0</h3>
+                            <h3 class="m-b-5 font-strong"><?= rupiah($masuk['jml']) ?></h3>
                             <div class="m-b-5">Pemasukan</div><i class="ti-user widget-stat-icon"></i>
-                            <div><a href="santri.php" class="small-box-footer color-white ">
+                            <div><a href="masuk.php" class="small-box-footer color-white ">
                                     Lihat Selengkapnya <i class="fa fa-arrow-circle-right color-white"></i>
-                                </a></div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6">
                     <div class="ibox bg-danger color-white widget-stat">
                         <div class="ibox-body">
@@ -57,7 +59,6 @@ $df = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM modal WHERE kode = '
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
