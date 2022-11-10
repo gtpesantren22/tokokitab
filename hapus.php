@@ -37,3 +37,14 @@ if ($kd === 'jasa') {
         ";
     }
 }
+
+if ($kd === 'mdu') {
+    $sql = mysqli_query($conn, "DELETE FROM modal_utama ");
+    if ($sql) {
+        echo "
+        <script>
+            window.location = 'modal.php';
+        </script>
+        ";
+    }
+}

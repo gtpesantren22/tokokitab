@@ -20,49 +20,51 @@ include 'header.php';
         </div>
         <div class="ibox-body">
             <br>
-            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Kode Jual</th>
-                        <th>Nis</th>
-                        <th>Nama</th>
-                        <th>Tanggal</th>
-                        <th>Jumlah Jual</th>
-                        <th>Total</th>
-                        <th>Bayar</th>
-                        <th>Kembali</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php
-                    $no = 1;
-                    include 'koneksi.php';
-                    $sql = mysqli_query($conn, "SELECT * FROM tb_santri JOIN penjualan ON tb_santri.nis = penjualan.nis");
-                    while ($data = mysqli_fetch_assoc($sql)) {
-                    ?>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                    <thead>
                         <tr>
-                            <td><?= $no++ ?></td>
-                            <td><?= $data['kd_jual'] ?></td>
-                            <td><?= $data['nis'] ?></td>
-                            <td><?= $data['nama'] ?></td>
-                            <td><?= $data['tanggal'] ?></td>
-                            <td><?= $data['jml_jual'] ?></td>
-                            <td><?= rupiah($data['total']) ?></td>
-                            <td><?= rupiah($data['bayar']) ?></td>
-                            <td><?= rupiah($data['kembali']) ?></td>
-                            <td>
-                                <a href="detail_penjualan.php?kd=<?= $data['kd_jual']; ?>" class="btn btn-warning btn-rounded center"><i class="fa fa-pencil"> </i></a>
-                                <a href="hapus_penjualan.php?kd=<?= $data['kd_jual']; ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" class="btn btn-danger btn-rounded "><i class="fa fa-trash"> </i></a>
-                            </td>
+                            <th>No</th>
+                            <th>Kode Jual</th>
+                            <th>Nis</th>
+                            <th>Nama</th>
+                            <th>Tanggal</th>
+                            <th>Jumlah Jual</th>
+                            <th>Total</th>
+                            <th>Bayar</th>
+                            <th>Kembali</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    </thead>
 
-</div>
-<?php include 'footer.php'; ?>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        include 'koneksi.php';
+                        $sql = mysqli_query($conn, "SELECT * FROM tb_santri JOIN penjualan ON tb_santri.nis = penjualan.nis");
+                        while ($data = mysqli_fetch_assoc($sql)) {
+                        ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $data['kd_jual'] ?></td>
+                                <td><?= $data['nis'] ?></td>
+                                <td><?= $data['nama'] ?></td>
+                                <td><?= $data['tanggal'] ?></td>
+                                <td><?= $data['jml_jual'] ?></td>
+                                <td><?= rupiah($data['total']) ?></td>
+                                <td><?= rupiah($data['bayar']) ?></td>
+                                <td><?= rupiah($data['kembali']) ?></td>
+                                <td>
+                                    <a href="detail_penjualan.php?kd=<?= $data['kd_jual']; ?>" class="btn btn-warning btn-rounded center"><i class="fa fa-pencil"> </i></a>
+                                    <a href="hapus_penjualan.php?kd=<?= $data['kd_jual']; ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" class="btn btn-danger btn-rounded "><i class="fa fa-trash"> </i></a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+    </div>
+    <?php include 'footer.php'; ?>

@@ -120,7 +120,7 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                         </ul>
                     </li>
 
-                    <li>
+                    <!-- <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-suitcase"></i>
                             <span class="nav-label">Modal</span><i class="fa fa-angle-left arrow"></i></a>
                         <ul class="nav-2-level collapse">
@@ -131,8 +131,12 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                                 <a href="modal_pecah.php">Modal Pecahan</a>
                             </li>
                         </ul>
+                    </li> -->
+                    <li>
+                        <a href="modal.php"><i class="sidebar-item-icon fa fa-suitcase"></i>
+                            <span class="nav-label">Modal</span>
+                        </a>
                     </li>
-
                     <li>
                         <a href="javascript:;"><i class="sidebar-item-icon fa fa-shopping-cart"></i>
                             <span class="nav-label">Transaksi</span><i class="fa fa-angle-left arrow"></i></a>
