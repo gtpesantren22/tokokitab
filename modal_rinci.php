@@ -191,12 +191,12 @@ $jasa = mysqli_fetch_assoc($sql5);
                 <div class="col-md-5">
                     <center><b><u>Statistik Modal</u></b></center>
                     <div id="bar-example"></div>
-                    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-                    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+                    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
                     <script src="morris/morris.js"></script>
-                    <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
                     <script src="morris/examples/lib/example.js"></script>
-                    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
                     <link rel="stylesheet" href="morris/morris.css">
                     <script>
                     var masuk = Number(<?= $masuk['jml'] ?>);
