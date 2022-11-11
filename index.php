@@ -75,6 +75,7 @@ $pekeluar = $keluar['jml'] + $kolak['jml'] + $jasa['jasa_keluar'];
                     <div>
                         <div id="bar-example"></div>
                         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script> -->
+                        <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
                         <script src="morris/morris.js"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
