@@ -2,11 +2,11 @@
 include 'header.php';
 include 'koneksi.php';
 
-$masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) != null, SUM(nominal),0) as jml FROM masuk"));
-$keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) != null, SUM(nominal),0) as jml FROM keluar"));
-$jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) != null, SUM(total),0) as jml FROM detail_jual"));
-$kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) != null, SUM(total),0) as jml FROM detail_kolakan"));
-$jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(debet) != null, SUM(debet),0) AS jasa_masuk, IF(SUM(kredit) != null, SUM(kredit),0) AS jasa_keluar FROM jasa"));
+$masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) = null, 0, SUM(nominal)) as jml FROM masuk"));
+$keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) = null, 0, SUM(nominal)) as jml FROM keluar"));
+$jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) = null, 0, SUM(total)) as jml FROM detail_jual"));
+$kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) = null, 0, SUM(total)) as jml FROM detail_kolakan"));
+$jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(debet) = null, 0, SUM(debet)) AS jasa_masuk, IF(SUM(kredit) = null, 0, SUM(kredit)) AS jasa_keluar FROM jasa"));
 
 $pemasuk = $masuk['jml'] + $jual['jml'] + $jasa['jasa_masuk'];
 $pekeluar = $keluar['jml'] + $kolak['jml'] + $jasa['jasa_keluar'];
@@ -90,11 +90,11 @@ $pekeluar = $keluar['jml'] + $kolak['jml'] + $jasa['jasa_keluar'];
                                     $sqlr = mysqli_query($conn, "SELECT * FROM modal ");
                                     while ($ar = mysqli_fetch_assoc($sqlr)) {
                                         $ktg = $ar['kode'];
-                                        $masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) != null, SUM(nominal),0) as jml FROM masuk WHERE kategori = '$ktg' "));
-                                        $keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) != null, SUM(nominal),0) as jml FROM keluar WHERE kategori = '$ktg' "));
-                                        $jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) != null, SUM(total),0) as jml FROM detail_jual WHERE kategori = '$ktg'"));
-                                        $kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) != null, SUM(total),0) as jml FROM detail_kolakan WHERE kategori = '$ktg'"));
-                                        $jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(debet) != null, SUM(debet),0) AS jasa_masuk, IF(SUM(kredit) != null, SUM(kredit),0) AS jasa_keluar FROM jasa WHERE kategori = '$ktg'"));
+                                        $masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) = null, 0, SUM(nominal)) as jml FROM masuk WHERE kategori = '$ktg' "));
+                                        $keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(nominal) = null, 0, SUM(nominal)) as jml FROM keluar WHERE kategori = '$ktg' "));
+                                        $jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) = null, 0, SUM(total)) as jml FROM detail_jual WHERE kategori = '$ktg'"));
+                                        $kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(total) = null, 0, SUM(total)) as jml FROM detail_kolakan WHERE kategori = '$ktg'"));
+                                        $jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT IF(SUM(debet) = null, 0, SUM(debet)) AS jasa_masuk, IF(SUM(kredit) = null, 0, SUM(kredit)) AS jasa_keluar FROM jasa WHERE kategori = '$ktg'"));
 
                                     ?> {
                                     y: '<?= $ar['nama'] ?>',
