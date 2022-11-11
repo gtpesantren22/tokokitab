@@ -2,149 +2,133 @@
 include 'header.php';
 include 'koneksi.php';
 
-$santri = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tb_santri"));
-//echo $santri;
+$masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) AS jml FROM masuk"));
+$keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) AS jml FROM keluar"));
+$jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) AS jml FROM detail_jual"));
+$kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) AS jml FROM detail_kolakan"));
+$jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(debet) AS jasa_masuk, SUM(kredit) AS jasa_keluar FROM jasa"));
 
-$kitab = mysqli_num_rows(mysqli_query($conn, "SELECT *, COUNT( * ) AS total FROM kitab GROUP BY id_kitab"));
-//echo $kitab;
-
-
+$pemasuk = $masuk['jml'] + $jual['jml'] + $jasa['jasa_masuk'];
+$pekeluar = $keluar['jml'] + $kolak['jml'] + $jasa['jasa_keluar'];
 ?>
 <!-- START PAGE CONTENT-->
 <div class="page-heading">
-    <h1 class="page-title">DataTables</h1>
+    <h1 class="page-title">Dashboard</h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="index.html"><i class="la la-home font-20"></i></a>
         </li>
-        <li class="breadcrumb-item">DataTables</li>
+        <li class="breadcrumb-item">Dashboard</li>
     </ol>
 </div>
 <div class="page-content fade-in-up">
     <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="ibox bg-success color-white widget-stat">
                 <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong"><?php echo $santri; ?></h2>
-                    <div class="m-b-5">Santri</div><i class="ti-user widget-stat-icon"></i>
-                    <div><a href="santri.php" class="small-box-footer color-white ">
+                    <h2 class="m-b-5 font-strong"><?= rupiah($pemasuk) ?></h2>
+                    <div class="m-b-5">Pemasukan</div><i class="ti-user widget-stat-icon"></i>
+                    <div><a href="#" class="small-box-footer color-white ">
                             Lihat Selengkapnya <i class="fa fa-arrow-circle-right color-white"></i>
                         </a></div>
 
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ibox bg-info color-white widget-stat">
-                <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong"><?php echo $kitab; ?></h2>
-                    <div class="m-b-5">Kitab</div><i class="ti-book widget-stat-icon"></i>
-                    <div> <a href="kitab.php" class="small-box-footer color-white ">
-                            Lihat Selengkapnya <i class="fa fa-arrow-circle-right color-white"></i>
-                        </a></div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="ibox bg-warning color-white widget-stat">
                 <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong">$1570</h2>
-                    <div class="m-b-5">TOTAL INCOME</div><i class="fa fa-money widget-stat-icon"></i>
-                    <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
+                    <h2 class="m-b-5 font-strong"><?= rupiah($pekeluar) ?>
+                    </h2>
+                    <div class="m-b-5">Pengeluaran</div><i class="fa fa-money widget-stat-icon"></i>
+                    <div><a href="#" class="small-box-footer color-white ">
+                            Lihat Selengkapnya <i class="fa fa-arrow-circle-right color-white"></i>
+                        </a></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="ibox bg-danger color-white widget-stat">
+        <div class="col-lg-4 col-md-6">
+            <div class="ibox bg-info color-white widget-stat">
                 <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong">108</h2>
-                    <div class="m-b-5">NEW USERS</div><i class="ti-user widget-stat-icon"></i>
-                    <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
+                    <h2 class="m-b-5 font-strong"><?= rupiah($pemasuk - $pekeluar) ?></h2>
+                    <div class="m-b-5">Saldo</div><i class="ti-book widget-stat-icon"></i>
+                    <div> <a href="#" class="small-box-footer color-white ">
+                            Lihat Selengkapnya <i class="fa fa-arrow-circle-right color-white"></i>
+                        </a></div>
                 </div>
             </div>
         </div>
+
     </div>
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-body">
                     <div class="flexbox mb-4">
                         <div>
-                            <h3 class="m-0">Statistics</h3>
-                            <div>Your shop sales analytics</div>
+                            <h3 class="m-0">Statistics Modal</h3>
+                            <div>Statistik Penggunaan Modal</div>
                         </div>
                         <div class="d-inline-flex">
-                            <div class="px-3" style="border-right: 1px solid rgba(0,0,0,.1);">
-                                <div class="text-muted">WEEKLY INCOME</div>
-                                <div>
-                                    <span class="h2 m-0">$850</span>
-                                    <span class="text-success ml-2"><i class="fa fa-level-up"></i> +25%</span>
-                                </div>
-                            </div>
-                            <div class="px-3">
-                                <div class="text-muted">WEEKLY SALES</div>
-                                <div>
-                                    <span class="h2 m-0">240</span>
-                                    <span class="text-warning ml-2"><i class="fa fa-level-down"></i> -12%</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
+                        <div id="bar-example"></div>
+                        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+                        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+                        <script src="morris/morris.js"></script>
+                        <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+                        <script src="morris/examples/lib/example.js"></script>
+                        <link rel="stylesheet"
+                            href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+                        <link rel="stylesheet" href="morris/morris.css">
+                        <script>
+                        Morris.Bar({
+                            element: 'bar-example',
+                            data: [
+                                <?php
+                                    $sqlr = mysqli_query($conn, "SELECT * FROM modal ");
+                                    while ($ar = mysqli_fetch_assoc($sqlr)) {
+                                        $ktg = $ar['kode'];
+                                        $masuk = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) AS jml FROM masuk WHERE kategori = '$ktg' "));
+                                        $keluar =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(nominal) AS jml FROM keluar WHERE kategori = '$ktg' "));
+                                        $jual =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) AS jml FROM detail_jual WHERE kategori = '$ktg'"));
+                                        $kolak =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(total) AS jml FROM detail_kolakan WHERE kategori = '$ktg'"));
+                                        $jasa =  mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(debet) AS jasa_masuk, SUM(kredit) AS jasa_keluar FROM jasa WHERE kategori = '$ktg'"));
+
+                                    ?> {
+                                    y: '<?= $ar['nama'] ?>',
+                                    Pemasukan: Number(<?= $masuk['jml'] ?>),
+                                    Pengeluaran: Number(<?= $keluar['jml'] ?>),
+                                    Penjualan: Number(<?= $jual['jml'] ?>),
+                                    Kolakan: Number(<?= $kolak['jml'] ?>),
+                                    Jasa: Number(<?= $jasa['jasa_masuk'] ?>),
+                                    Jasa2: Number(<?= $jasa['jasa_keluar'] ?>)
+                                },
+                                <?php } ?>
+                            ],
+                            xkey: 'y',
+                            ykeys: ['Pemasukan', 'Pengeluaran', 'Penjualan', 'Kolakan', 'Jasa', 'Jasa2'],
+                            labels: ['Pemasukan', 'Pengeluaran', 'Penjualan', 'Kolakan', 'Jasa Debet',
+                                'Jasa Kredit'
+                            ]
+                        });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
+        <!-- <div class="col-lg-4">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Statistics</div>
                 </div>
                 <div class="ibox-body">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <canvas id="doughnut_chart" style="height:160px;"></canvas>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="m-b-20 text-success"><i class="fa fa-circle-o m-r-10"></i>Desktop 52%</div>
-                            <div class="m-b-20 text-info"><i class="fa fa-circle-o m-r-10"></i>Tablet 27%</div>
-                            <div class="m-b-20 text-warning"><i class="fa fa-circle-o m-r-10"></i>Mobile 21%</div>
-                        </div>
-                    </div>
-                    <ul class="list-group list-group-divider list-group-full">
-                        <li class="list-group-item">Chrome
-                            <span class="float-right text-success"><i class="fa fa-caret-up"></i> 24%</span>
-                        </li>
-                        <li class="list-group-item">Firefox
-                            <span class="float-right text-success"><i class="fa fa-caret-up"></i> 12%</span>
-                        </li>
-                        <li class="list-group-item">Opera
-                            <span class="float-right text-danger"><i class="fa fa-caret-down"></i> 4%</span>
-                        </li>
-                    </ul>
+
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
-
-
-    <style>
-    .visitors-table tbody tr td:last-child {
-        display: flex;
-        align-items: center;
-    }
-
-    .visitors-table .progress {
-        flex: 1;
-    }
-
-    .visitors-table .progress-parcent {
-        text-align: right;
-        margin-left: 10px;
-    }
-    </style>
 
 </div>
 <!-- END PAGE CONTENT-->
