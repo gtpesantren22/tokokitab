@@ -23,7 +23,7 @@ include 'koneksi.php';
 <body class="bg-silver-300">
     <div class="content">
         <div class="brand">
-            <a class="link" href="index.php">TokoKitab</a>
+            <a class="link" href="index.php">Unit Usaha DWK</a>
         </div>
         <form id="login-form" action="" method="post">
             <h2 class="login-title">Log in</h2>
