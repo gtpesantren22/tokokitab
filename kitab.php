@@ -1,6 +1,6 @@
 <?php
 include 'header.php';
-require 'assets/vendor/autoload.php'; 
+require 'assets/vendor/autoload.php';
 ?>
 <div class="page-heading">
     <h1 class="page-title">Data Barang</h1>
@@ -14,12 +14,19 @@ require 'assets/vendor/autoload.php';
 <div class="page-content fade-in-up">
     <div class="ibox">
         <div class="ibox-head">
-            <div class="ibox-title">Data Barang</div>
-            <a href="tambah_kitab.php" class="btn btn-primary  btn-rounded pull-right"><i class="fa ti-plus"> Tambah Barang</i></a>
+            <div class="ibox-title">
+                <a href="tambah_kitab.php" class="btn btn-primary btn-rounded pull-right"><i class="fa ti-plus"> Tambah
+                        Barang</i></a>
+                <a href="cetak_bar.php" target="_blank" class="btn btn-success btn-rounded pull-right"><i
+                        class="fa fa-barcode">
+                        Cetak
+                        Barcode</i></a>
+            </div>
         </div>
         <div class="ibox-body">
             <br>
-            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0"
+                width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -40,22 +47,25 @@ require 'assets/vendor/autoload.php';
                     $sql = mysqli_query($conn, "SELECT a.*, b.nama as nmMd FROM kitab a JOIN modal b ON a.kategori=b.kode ");
                     while ($data = mysqli_fetch_assoc($sql)) {
                     ?>
-                        <tr>
-                            <td><?= $no++; ?></td>
-                            <td>
-                                <?= $data['kd_kitab']; ?>
-                                
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td>
+                            <?= $data['kd_kitab']; ?>
+
                         </td>
-                            <td><?= $data['nama']; ?></td>
-                            <td><?= $data['stok']; ?></td>
-                            <td><?= rupiah($data['harga_kolak']); ?></td>
-                            <td><?= rupiah($data['harga_jual']); ?></td>
-                            <td><?= $data['nmMd']; ?></td>
-                            <td>
-                                <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
-                                <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
-                            </td>
-                        </tr>
+                        <td><?= $data['nama']; ?></td>
+                        <td><?= $data['stok']; ?></td>
+                        <td><?= rupiah($data['harga_kolak']); ?></td>
+                        <td><?= rupiah($data['harga_jual']); ?></td>
+                        <td><?= $data['nmMd']; ?></td>
+                        <td>
+                            <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning btn-sm"><i
+                                    class="fa fa-pencil"></i></a>
+                            <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>"
+                                onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger btn-sm"><i
+                                    class="fa fa-times"></i></a>
+                        </td>
+                    </tr>
                     <?php } ?>
                 </tbody>
             </table>
