@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php
+include 'header.php';
+require 'assets/vendor/autoload.php'; 
+?>
 <div class="page-heading">
     <h1 class="page-title">Data Barang</h1>
     <ol class="breadcrumb">
@@ -16,7 +19,7 @@
         </div>
         <div class="ibox-body">
             <br>
-            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -39,15 +42,18 @@
                     ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $data['kd_kitab']; ?></td>
+                            <td>
+                                <?= $data['kd_kitab']; ?>
+                                
+                        </td>
                             <td><?= $data['nama']; ?></td>
                             <td><?= $data['stok']; ?></td>
                             <td><?= rupiah($data['harga_kolak']); ?></td>
                             <td><?= rupiah($data['harga_jual']); ?></td>
                             <td><?= $data['nmMd']; ?></td>
                             <td>
-                                <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning "><i class="fa fa-pencil"></i></a>
-                                <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger "><i class="fa fa-times"></i></a>
+                                <a href="edit_kitab.php?id=<?= $data['id_kitab']; ?>" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i></a>
+                                <a href="<?= 'hapus_kitab.php?id_kitab=' . $data['id_kitab'] ?>" onclick="return confirm('Yakin Menghapus Data Ini?')" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     <?php } ?>

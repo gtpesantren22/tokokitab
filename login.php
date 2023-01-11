@@ -9,7 +9,7 @@ include 'koneksi.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Login</title>
+    <title>Unit Usaha - PPDWK</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -30,8 +30,7 @@ include 'koneksi.php';
             <div class="form-group">
                 <div class="input-group-icon right">
                     <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                    <input class="form-control" type="text" name="user" placeholder="Username" autocomplete="off"
-                        required>
+                    <input class="form-control" type="text" name="user" placeholder="Username" autocomplete="off" required>
                 </div>
             </div>
             <div class="form-group">
@@ -73,26 +72,26 @@ include 'koneksi.php';
     <script src="assets/js/app.js" type="text/javascript"></script>
     <!-- PAGE LEVEL SCRIPTS-->
     <script type="text/javascript">
-    $(function() {
-        $('#login-form').validate({
-            errorClass: "help-block",
-            rules: {
-                email: {
-                    required: true,
-                    email: true
+        $(function() {
+            $('#login-form').validate({
+                errorClass: "help-block",
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true
+                    }
                 },
-                password: {
-                    required: true
-                }
-            },
-            highlight: function(e) {
-                $(e).closest(".form-group").addClass("has-error")
-            },
-            unhighlight: function(e) {
-                $(e).closest(".form-group").removeClass("has-error")
-            },
+                highlight: function(e) {
+                    $(e).closest(".form-group").addClass("has-error")
+                },
+                unhighlight: function(e) {
+                    $(e).closest(".form-group").removeClass("has-error")
+                },
+            });
         });
-    });
     </script>
 </body>
 
