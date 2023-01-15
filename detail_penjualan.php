@@ -21,7 +21,7 @@ $kd_jual = $data['kd_jual'];
 </div>
 <div class="page-content fade-in-up">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Penjualan</div>
@@ -35,16 +35,89 @@ $kd_jual = $data['kd_jual'];
                     </div>
                 </div>
                 <div class="ibox-body">
-                    <form>
-                        <div class="form-group">
-                            <label>Kode Penjualan</label>
-                            <input class="form-control" type="text" value="<?= $data['kd_jual']; ?>" disabled>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="form-horizontal">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Kode</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control form-control-sm" type="text" value="<?= $data['kd_jual']; ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Tanggal</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control form-control-sm" type="text" value="<?= $data['tanggal']; ?>" readonly>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
                         </div>
-                        <div class="form-group">
-                            <label>Tanggal</label>
-                            <input class="form-control" type="date" value="<?= $data['tanggal']; ?>" disabled>
+                        <div class="col-md-6">
+                            <!-- <small>TOTAL BELANJA</small> -->
+                            <p style="font-weight: bold; font-size: 50px; text-align: right;"><?= rupiah($data['total']); ?></p>
+                            <hr>
                         </div>
-                    </form>
+                        <div class="col-md-12">
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-2 form-group">
+                                        <input class="form-control" type="text" placeholder="Scan Barcode" required autofocus>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <input class="form-control" type="text" placeholder="Nama Barang" readonly>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <input class="form-control" type="text" placeholder="Harga Satuan" readonly>
+                                    </div>
+                                    <div class="col-sm-1 form-group">
+                                        <input class="form-control" type="text" placeholder="Stok" readonly>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <input class="form-control" type="number" placeholder="QTY" required>
+                                    </div>
+                                    <div class="col-sm-1 form-group">
+                                        <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kitab</th>
+                                        <th>Jumlah</th>
+                                        <th>Total</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $sql = mysqli_query($conn, "SELECT d.id_dtj, d.jumlah ,d.total  , k.nama FROM detail_jual d JOIN kitab k ON d.kd_kitab = k.kd_kitab WHERE d.kd_jual = '$kd_jual' ");
+                                    while ($data = mysqli_fetch_assoc($sql)) {
+
+                                    ?>
+                                        <tr>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $data['nama']; ?></td>
+                                            <td><?= $data['jumlah']; ?></td>
+                                            <td><?= rupiah($data['total']); ?></td>
+                                            <td>
+                                                <a href="hapus_detail_jual.php?id=<?= $data['id_dtj']; ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                        $no++;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

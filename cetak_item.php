@@ -31,8 +31,6 @@ ob_start();
     <table class="table table-bordered">
         <?php
         $no = 1;
-
-
         for ($i = 0; $i < $jml; $i++) {
             
             if ($i % 5 == 0) {
@@ -65,5 +63,5 @@ ob_end_clean();
 
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output("" . $nama_dokumen . ".pdf", 'D');
-// // $db1->close();
+// $db1->close();
 ?>
