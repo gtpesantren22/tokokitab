@@ -5,8 +5,8 @@ include 'header.php';
 $kd = $_GET['kd'];
 $sql = mysqli_query($conn, "SELECT * FROM penjualan WHERE kd_jual = '$kd' ");
 
-$data = mysqli_fetch_assoc($sql);
-$kd_jual = $data['kd_jual'];
+$datas = mysqli_fetch_assoc($sql);
+$kd_jual = $datas['kd_jual'];
 ?>
 
 <!-- START PAGE CONTENT-->
@@ -39,15 +39,17 @@ $kd_jual = $data['kd_jual'];
                         <div class="col-md-6">
                             <form class="form-horizontal">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Kode</label>
+                                    <label class="col-sm-2 col-form-label">No. Nota</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control form-control-sm" type="text" value="<?= $data['kd_jual']; ?>" readonly>
+                                        <input class="form-control form-control-sm" type="text"
+                                            value="<?= $datas['kd_jual']; ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Tanggal</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control form-control-sm" type="text" value="<?= $data['tanggal']; ?>" readonly>
+                                        <input class="form-control form-control-sm" type="text"
+                                            value="<?= $datas['tanggal']; ?>" readonly>
                                     </div>
                                 </div>
                             </form>
@@ -55,40 +57,80 @@ $kd_jual = $data['kd_jual'];
                         </div>
                         <div class="col-md-6">
                             <!-- <small>TOTAL BELANJA</small> -->
-                            <p style="font-weight: bold; font-size: 50px; text-align: right;"><?= rupiah($data['total']); ?></p>
+                            <p style="font-weight: bold; font-size: 50px; text-align: right;">
+                                <?= rupiah($datas['total']); ?></p>
                             <hr>
                         </div>
                         <div class="col-md-12">
-                            <form>
+                            <form method="post">
                                 <div class="row">
-                                    <div class="col-sm-2 form-group">
-                                        <input class="form-control" type="text" placeholder="Scan Barcode" required autofocus>
-                                    </div>
-                                    <div class="col-sm-4 form-group">
-                                        <input class="form-control" type="text" placeholder="Nama Barang" readonly>
-                                    </div>
-                                    <div class="col-sm-2 form-group">
-                                        <input class="form-control" type="text" placeholder="Harga Satuan" readonly>
+                                    <div class="col-sm-5 form-group">
+                                        <input class="form-control" name="kode" type="text" placeholder="Scan Barcode"
+                                            required autofocus>
                                     </div>
                                     <div class="col-sm-1 form-group">
-                                        <input class="form-control" type="text" placeholder="Stok" readonly>
+                                        <button type="submit" name="cari" class="btn btn-md btn-primary"><i
+                                                class="fa fa-search"></i></button>
                                     </div>
-                                    <div class="col-sm-2 form-group">
-                                        <input class="form-control" type="number" placeholder="QTY" required>
-                                    </div>
-                                    <div class="col-sm-1 form-group">
-                                        <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i></button>
+                                    <div class="col-sm-3 form-group">
+                                        <button type="button" class="btn btn-md btn-success" data-toggle="modal"
+                                            data-target=".bd-example-modal-lg">Cari Barang</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
+                        <?php if (isset($_POST['cari']) || isset($_POST['pilih'])) {
+                            $kodekk = $_POST['kode'];
+                            $ktb = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kitab WHERE kd_kitab = '$kodekk' "));
+                        ?>
+                        <div class="col-md-12">
+                            <form action="" method="post">
+                                <input type="hidden" name="kd_jual" value="<?= $kd_jual; ?>">
+                                <div class="row">
+                                    <div class="col-sm-2 form-group">
+                                        <label for="">Kode</label>
+                                        <input name="kd_kitab" class="form-control" type="text"
+                                            placeholder="Kode Barang" value="<?= $ktb['kd_kitab']; ?>" readonly>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
+                                        <label for="">Nama Barang</label>
+                                        <input class="form-control" type="text" placeholder="Nama Barang"
+                                            value="<?= $ktb['nama']; ?>" readonly>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <label for="">Harga</label>
+                                        <input class="form-control" type="text" placeholder="Harga Satuan"
+                                            value="<?= rupiah($ktb['harga_jual']); ?>" readonly>
+                                    </div>
+                                    <div class="col-sm-1 form-group">
+                                        <label for="">Stok</label>
+                                        <input class="form-control" type="text" placeholder="Stok"
+                                            value="<?= $ktb['stok']; ?>" readonly>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <label for="">QTY</label>
+                                        <input class="form-control" type="number" placeholder="QTY" name="jumlah"
+                                            required>
+                                    </div>
+                                    <div class="col-sm-1 form-group">
+                                        <label for="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <button class="btn btn-success" name="simpan" type="submit"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <?php } ?>
+
                         <div class="col-md-12">
                             <br>
-                            <table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
-                                <thead class="thead-default">
-                                    <tr>
+                            <table class="table table-striped table-bordered table-hover table-sm" id="example-table"
+                                cellspacing="0" width="100%">
+                                <thead>
+                                    <tr style="background-color: greenyellow;">
                                         <th>No</th>
                                         <th>Kitab</th>
+                                        <th>Harga</th>
                                         <th>Jumlah</th>
                                         <th>Total</th>
                                         <th>Aksi</th>
@@ -97,191 +139,178 @@ $kd_jual = $data['kd_jual'];
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    $sql = mysqli_query($conn, "SELECT d.id_dtj, d.jumlah ,d.total  , k.nama FROM detail_jual d JOIN kitab k ON d.kd_kitab = k.kd_kitab WHERE d.kd_jual = '$kd_jual' ");
+                                    $sql = mysqli_query($conn, "SELECT d.id_dtj, d.jumlah, d.total, k.nama, k.harga_jual FROM detail_jual d JOIN kitab k ON d.kd_kitab = k.kd_kitab WHERE d.kd_jual = '$kd' ");
                                     while ($data = mysqli_fetch_assoc($sql)) {
 
                                     ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $data['nama']; ?></td>
-                                            <td><?= $data['jumlah']; ?></td>
-                                            <td><?= rupiah($data['total']); ?></td>
-                                            <td>
-                                                <a href="hapus_detail_jual.php?id=<?= $data['id_dtj']; ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                        $no++;
-                                    }
-                                    ?>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= $data['nama']; ?></td>
+                                        <td><?= rupiah($data['harga_jual']); ?></td>
+                                        <td><?= $data['jumlah']; ?></td>
+                                        <td><?= rupiah($data['total']); ?></td>
+                                        <td>
+                                            <a href="hapus_detail_jual.php?id=<?= $data['id_dtj']; ?>"
+                                                onclick="return confirm('Yakin Akan Menghapus Data Ini ?')"
+                                                class="btn btn-danger btn-xs" data-toggle="tooltip"
+                                                data-original-title="Delete"><i class="fa fa-trash font-14"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Pembayaran</div>
-                    <div class="ibox-tools">
-                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
-                    </div>
-                </div>
-                <div class="ibox-body">
-                    <form class="form-horizontal" action="" method="POST" name="autoSumForm">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jumlah </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" value="<?= $data['jml_jual']; ?>" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Total</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="text" value="<?= rupiah($data['total']); ?>">
-                                <input type="hidden" name="total" value="<?= $data['total']; ?>" onFocus="startCalc();" onBlur="stopCalc();" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Bayar </label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" placeholder="Nominal Bayar" name="bayar" onFocus="startCalc();" onBlur="stopCalc();">
-
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Kembali</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" name="kembali" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12 ml-sm-auto">
-                                <button class="btn btn-info" name="majer" type="submit" value="submit">Bayar</button>
-                            </div>
-                        </div>
-                    </form>
-                    <script>
-                        function startCalc() {
-
-                            interval = setInterval("calc()", 1);
-                        }
-
-                        function calc() {
-                            total = document.autoSumForm.total.value;
-                            bayar = document.autoSumForm.bayar.value;
-                            document.autoSumForm.kembali.value = bayar - total;
-                        }
-
-                        function stopCalc() {
-
-                            clearInterval(interval);
-                        }
-                    </script>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-7">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Penjualan</div>
-                </div>
-                <div class="ibox-body">
-                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                        <thead class="thead-default">
-                            <tr>
-                                <th>No</th>
-                                <th>Kitab</th>
-                                <th>Jumlah</th>
-                                <th>Total</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            $sql = mysqli_query($conn, "SELECT d.id_dtj, d.jumlah ,d.total  , k.nama FROM detail_jual d JOIN kitab k ON d.kd_kitab = k.kd_kitab WHERE d.kd_jual = '$kd_jual' ");
-                            while ($data = mysqli_fetch_assoc($sql)) {
-
-                            ?>
+                        <div class="col-md-4 mt-3">
+                            <table class="table table-sm">
                                 <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $data['nama']; ?></td>
-                                    <td><?= $data['jumlah']; ?></td>
-                                    <td><?= rupiah($data['total']); ?></td>
-                                    <td>
-                                        <a href="hapus_detail_jual.php?id=<?= $data['id_dtj']; ?>" onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" class="btn btn-default btn-xs" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></a>
-                                    </td>
+                                    <th>TOTAL BELANJA</th>
+                                    <th>:</th>
+                                    <th><?= rupiah($datas['total']); ?></th>
                                 </tr>
-                            <?php
-                                $no++;
+                                <tr>
+                                    <th>BAYAR</th>
+                                    <th>:</th>
+                                    <th><?= rupiah($datas['bayar']); ?></th>
+                                </tr>
+                                <tr>
+                                    <th>KEMBALI</th>
+                                    <th>:</th>
+                                    <th><?= rupiah($datas['kembali']); ?></th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <button class="btn btn-sm btn-danger"><i class="fa fa-print"></i> Cetak
+                                            Nota</button>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-2 mt-3">
+                        </div>
+                        <div class="col-md-6 mt-3">
+                            <form class="form-horizontal" action="" method="POST" name="autoSumForm">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Jumlah </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" value="<?= $datas['jml_jual']; ?>"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Total</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" value="<?= rupiah($datas['total']); ?>">
+                                        <input type="hidden" name="total" value="<?= $datas['total']; ?>"
+                                            onFocus="startCalc();" onBlur="stopCalc();" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Bayar </label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="number" placeholder="Nominal Bayar"
+                                            name="bayar" onFocus="startCalc();" onBlur="stopCalc();">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Kembali</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="kembali" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"></label>
+                                    <div class="col-sm-10 ml-sm-auto">
+                                        <button class="btn btn-info" name="majer" type="submit"
+                                            value="submit">Bayar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <script>
+                            function startCalc() {
+
+                                interval = setInterval("calc()", 1);
                             }
-                            ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Data Kitab</div>
-                    <div class="ibox-tools">
-                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="fullscreen-link"><i class="fa fa-expand"></i></a>
+
+                            function calc() {
+                                total = document.autoSumForm.total.value;
+                                bayar = document.autoSumForm.bayar.value;
+                                document.autoSumForm.kembali.value = bayar - total;
+                            }
+
+                            function stopCalc() {
+
+                                clearInterval(interval);
+                            }
+                            </script>
+                        </div>
                     </div>
                 </div>
-                <div class="ibox-body">
-                    <form class="form-horizontal" method="post">
-                        <input type="hidden" name="kd_jual" value="<?= $kd_jual; ?>">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Pilih</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select2_demo_1" name="kd_kitab" id="selectExt" required>
-                                    <option value="">-pilih kitab-</option>
-                                    <?php
-                                    $sql = mysqli_query($conn, "SELECT * FROM kitab");
-                                    while ($row = mysqli_fetch_array($sql)) { ?>
-                                        <option value="<?= $row['kd_kitab']; ?>"><?= $row['nama']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Jumlah</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" type="number" placeholder="Jumlah" name="jumlah">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-12 ml-sm-auto">
-                                <button class="btn btn-info" type="submit" value="submit" name="simpan">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                Tambah pecah modal
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover table-sm" id="example-table2"
+                    cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Barang</th>
+                            <th>Nama</th>
+                            <th>Stok</th>
+                            <th>Harga Kolak</th>
+                            <th>Harga Jual</th>
+                            <th>Kategori</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
 
-<?php include 'footer.php'; ?>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        // include 'koneksi.php';
+                        $sql = mysqli_query($conn, "SELECT a.*, b.nama as nmMd FROM kitab a JOIN modal b ON a.kategori=b.kode ");
+                        while ($data = mysqli_fetch_assoc($sql)) {
+                        ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td>
+                                <?= $data['kd_kitab']; ?>
 
+                            </td>
+                            <td><?= $data['nama']; ?></td>
+                            <td><?= $data['stok']; ?></td>
+                            <td><?= rupiah($data['harga_kolak']); ?></td>
+                            <td><?= rupiah($data['harga_jual']); ?></td>
+                            <td><?= $data['nmMd']; ?></td>
+                            <td>
+                                <form action="" method="post">
+                                    <input type="hidden" name="kode" value="<?= $data['kd_kitab']; ?>">
+                                    <button type="submit" name="pilih" class="btn btn-success btn-primary btn-sm"><i
+                                            class="fa fa-check"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
 
+        </div>
+    </div>
+</div>
 
+<?php include 'footer.php';
 
-
-
-<?php
 if (isset($_POST['simpan'])) {
     $kd_kitab = $_POST['kd_kitab'];
     $jumlah = $_POST['jumlah'];
@@ -323,20 +352,18 @@ if (isset($_POST['simpan'])) {
 if (isset($_POST['majer'])) {
     $bayar = $_POST['bayar'];
     $kembali = $_POST['kembali'];
-    $totalbayar = $_POST['total'];
+    // $totalbayar = $_POST['total'];
 
 
     $sql = mysqli_query($conn, "UPDATE penjualan SET bayar = $bayar, kembali = $kembali  WHERE kd_jual = '$kd_jual' ");
-    $sql2 = mysqli_query($conn, "UPDATE penjualan SET bayar = bayar - $totalbayar WHERE kd_kitab = '$kd_kitab' ");
+    // $sql2 = mysqli_query($conn, "UPDATE penjualan SET bayar = bayar - $totalbayar WHERE kd_kitab = '$kd_kitab' ");
 
 
-    if ($sql && $sql2) {
-
-
+    if ($sql) {
         echo "
-        <script type='text/javascript'>
+        <script>
             alert('Berhasil Di Bayar');
-            window.location.href = 'penjualan.php?kd=" . $kd . "';
+            window.location = 'detail_penjualan.php?kd=" . $kd_jual . "';
         </script>
         ";
     }
