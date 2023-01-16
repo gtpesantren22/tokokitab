@@ -179,8 +179,8 @@ $kd_jual = $datas['kd_jual'];
                                 </tr>
                                 <tr>
                                     <th>
-                                        <button class="btn btn-sm btn-danger"><i class="fa fa-print"></i> Cetak
-                                            Nota</button>
+                                        <a href="nota.php?kd=<?= $kd_jual ?>" target="_blank" class="btn btn-sm btn-danger"><i class="fa fa-print"></i> Cetak
+                                            Nota</a>
                                     </th>
                                 </tr>
                             </table>
