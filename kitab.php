@@ -25,10 +25,13 @@ require 'assets/vendor/autoload.php';
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="cetak_bar.php">Cetak Semua</a>
+                            <a class="dropdown-item" href="cetak_bar.php">Download Semua</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Cetak Peritem</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal">Download Peritem</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal2">Print Barcode</a>
                         </li>
                     </ul>
                 </div>
@@ -105,6 +108,38 @@ require 'assets/vendor/autoload.php';
                     <div class="form-group">
                         <label for="">Jumlah Cetak</label>
                         <input type="number" name="jml" class="form-control" required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Cetak</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Print Barcode</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="print_barcode.php" method="post">
+                    <div class="form-group">
+                        <label for="">Pilih Barang</label><br>
+                        <select class="form-control" name="kd_kitab" id="" required>
+                            <option value="">-pilih kitab-</option>
+                            <?php
+                            $sql = mysqli_query($conn, "SELECT * FROM kitab ORDER BY nama ASC");
+                            while ($row = mysqli_fetch_array($sql)) { ?>
+                                <option value="<?= $row['kd_kitab']; ?>"><?= $row['nama']; ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
             </div>
             <div class="modal-footer">
