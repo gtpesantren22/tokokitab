@@ -26,7 +26,7 @@ function rp($angka)
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
 
     <style>
-        span {
+        body {
             font-family: Ubuntu;
         }
 
@@ -34,9 +34,9 @@ function rp($angka)
         th,
         td {
             font-family: Ubuntu;
-            color: #232323;
+            color: #000000;
             border-collapse: collapse;
-            border: 1px solid #999;
+            /* border: 1px solid #999; */
             /* padding: 8px 20px; */
         }
     </style>
@@ -45,16 +45,16 @@ function rp($angka)
 <body>
 
     <span style="font-weight: bold;">UNIT USAHA</span><br>
-    <span style="font-size: 10px;">PP Darul Lughah Wal Karomah</span><br>
-    <span style="font-size: 10px;">Sidomukti - Kraksaan</span>
+    <span style="font-size: 10px; font-weight: bold;">PP Darul Lughah Wal Karomah</span><br>
+    <span style="font-size: 10px; font-weight: bold;">Sidomukti - Kraksaan</span>
     <hr>
-    <span style="font-size: 10px;">No. Nota : <?= $datas['kd_jual'] ?></span><br>
-    <span style="font-size: 10px;">Pembeli : <?= $datas['nama'] ?></span><br>
-    <span style="font-size: 10px;">Tanggal : <?= $datas['tanggal'] ?></span>
+    <span style="font-size: 10px; font-weight: bold;">No. Nota : <?= $datas['kd_jual'] ?></span><br>
+    <!-- <span style="font-size: 10px; font-weight: bold;">Pembeli : <?= $datas['nama'] ?></span><br> -->
+    <span style="font-size: 10px; font-weight: bold;">Tanggal : <?= $datas['tanggal'] ?></span>
     <br>
     <br>
-    <table style="font-size: 10px;" width="100%" class="examnple">
-        <thead>
+    <table style="font-size: 10px; font-weight: bold;" width="100%" class="examnple">
+        <!-- <thead>
             <tr>
                 <th>No</th>
                 <th>Nama</th>
@@ -62,7 +62,7 @@ function rp($angka)
                 <th>Harga</th>
                 <th>Total</th>
             </tr>
-        </thead>
+        </thead> -->
         <tbody>
             <?php
             $no = 1;
@@ -72,32 +72,35 @@ function rp($angka)
             while ($qs = mysqli_fetch_assoc($sql)) {
             ?>
                 <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= $qs['nama'] ?></td>
-                    <td><?= $qs['jumlah'] ?></td>
-                    <td><?= rp($qs['harga_jual']) ?></td>
-                    <td><?= rp($qs['total']) ?></td>
+                    <!-- <th><?= $no++ ?></th> -->
+                    <th style="text-align: left;"><?= $qs['nama'] ?></th>
+                    <th style="text-align: left;"><?= $qs['jumlah'] ?></th>
+                    <th style="text-align: right;"><?= rp($qs['harga_jual']) ?></th>
+                    <th style="text-align: right;"><?= rp($qs['total']) ?></th>
                 </tr>
             <?php } ?>
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="3" style="text-align: right;">TOTAL</th>
-                <th colspan="2"><?= rupiah($jml['sm']) ?></th>
+                <th colspan="4" style="text-align: center;">---------------------------------------------------------</th>
             </tr>
             <tr>
-                <th colspan="3" style="text-align: right;">BAYAR</th>
-                <th colspan="2"><?= rupiah($datas['bayar']) ?></th>
+                <th colspan="2" style="text-align: left;">TOTAL</th>
+                <th colspan="2" style="text-align: right;"><?= rupiah($jml['sm']) ?></th>
             </tr>
             <tr>
-                <th colspan="3" style="text-align: right;">KEMBALI</th>
-                <th colspan="2"><?= rupiah($datas['kembali']) ?></th>
+                <th colspan="2" style="text-align: left;">BAYAR</th>
+                <th colspan="2" style="text-align: right;"><?= rupiah($datas['bayar']) ?></th>
+            </tr>
+            <tr>
+                <th colspan="2" style="text-align: left;">KEMBALI</th>
+                <th colspan="2" style="text-align: right;"><?= rupiah($datas['kembali']) ?></th>
             </tr>
         </tfoot>
     </table>
     <hr>
-    <p style="font-size: 8px;">* Nota ini sebagai bukti Pmebayaran yang sah dari UNIT USAHA PP Darul Lughah Wal Karomah</p>
-    <center style="font-size: 8px;">powered by : SMK DWK</center>
+    <p style="font-size: 8px; font-weight: bold; color: #000000;">* Nota ini sebagai bukti Pmebayaran yang sah dari UNIT USAHA PP Darul Lughah Wal Karomah</p>
+    <center style="font-size: 8px; font-weight: bold;">powered by : SMK DWK</center>
 </body>
 <script>
     window.print();
