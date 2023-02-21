@@ -49,7 +49,7 @@ function rp($angka)
     <span style="font-size: 10px; font-weight: bold;">Sidomukti - Kraksaan</span>
     <hr>
     <span style="font-size: 10px; font-weight: bold;">No. Nota : <?= $datas['kd_jual'] ?></span><br>
-    <!-- <span style="font-size: 10px; font-weight: bold;">Pembeli : <?= $datas['nama'] ?></span><br> -->
+    <span style="font-size: 10px; font-weight: bold;">Pembeli : <?= $datas['nama'] ?></span><br>
     <span style="font-size: 10px; font-weight: bold;">Tanggal : <?= $datas['tanggal'] ?></span>
     <br>
     <br>
@@ -72,10 +72,13 @@ function rp($angka)
             while ($qs = mysqli_fetch_assoc($sql)) {
             ?>
                 <tr>
-                    <!-- <th><?= $no++ ?></th> -->
-                    <th style="text-align: left;"><?= $qs['nama'] ?></th>
-                    <th style="text-align: left;"><?= $qs['jumlah'] ?></th>
-                    <th style="text-align: right;"><?= rp($qs['harga_jual']) ?></th>
+                    <th><?= $no++ ?>.</th>
+                    <th style="text-align: left;" colspan="3"><?= $qs['nama'] ?></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th style="text-align: left;"><?= rp($qs['harga_jual']) ?></th>
+                    <th style="text-align: right;">x<?= $qs['jumlah'] ?></th>
                     <th style="text-align: right;"><?= rp($qs['total']) ?></th>
                 </tr>
             <?php } ?>
