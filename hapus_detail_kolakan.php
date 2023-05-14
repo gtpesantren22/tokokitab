@@ -2,8 +2,10 @@
 
 include 'koneksi.php';
 $id = $_GET['id'];
-$dtkitab = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kitab WHERE id_kitab = '$id' "));
 $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM detail_kolakan WHERE id_dtk = '$id' "));
+
+$kdktb = $data['kd_kitab'];
+$dtkitab = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM kitab WHERE kd_kitab = '$kdktb' "));
 
 $jumlah = $data['jumlah'];
 $kd_kitab = $data['kd_kitab'];

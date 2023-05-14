@@ -23,17 +23,20 @@ function rp($angka)
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+
         body {
-            font-family: Ubuntu;
+            /* font-family: Roboto; */
+
         }
 
         .examnple,
         th,
         td {
-            font-family: Ubuntu;
+            /* font-family: Roboto; */
             color: #000000;
             border-collapse: collapse;
             /* border: 1px solid #999; */
