@@ -164,6 +164,11 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                             <span class="nav-label">Penjualan</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="rekap.php"><i class="sidebar-item-icon fa fa-list"></i>
+                            <span class="nav-label">Rekap</span>
+                        </a>
+                    </li>
 
 
 
