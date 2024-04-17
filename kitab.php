@@ -34,7 +34,8 @@ require 'assets/vendor/autoload.php';
                             <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal2">Print Barcode</a>
                         </li>
                     </ul>
-                </div>
+                </div> |
+                <a href="expKitab.php" target="_blank" class="btn btn-primary btn-rounded"><i class="fa ti-download"> Download Data</i></a>
             </div>
         </div>
         <div class="ibox-body">
