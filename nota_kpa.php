@@ -33,7 +33,7 @@ include 'footer.php';
             type: "POST",
             url: "datanota.php",
             data: {
-                "tahun": ""
+                "tahun": "",
             },
             success: function(data) {
                 $('#hasil-data').html(data);
