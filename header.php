@@ -150,6 +150,9 @@ $bulan = array("", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "July
                             <li>
                                 <a href="jasa.php">Setoran Jasa</a>
                             </li>
+                            <li>
+                                <a href="nota_kpa.php">Nota KPA</a>
+                            </li>
                         </ul>
                     </li>
 
