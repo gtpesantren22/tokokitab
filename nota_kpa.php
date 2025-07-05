@@ -35,6 +35,7 @@ include 'footer.php';
             data: {
                 "tahun": "",
             },
+            dataType: 'html',
             success: function(data) {
                 $('#hasil-data').html(data);
             },
@@ -43,4 +44,21 @@ include 'footer.php';
             }
         })
     });
+    $('#select-tahun').on('change', function() {
+        var tahun = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "datanota.php",
+            data: {
+                tahun: tahun,
+            },
+            dataType: 'html',
+            success: function(data) {
+                $('#hasil-data').html(data);
+            },
+            error: function(xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        })
+    })
 </script>
