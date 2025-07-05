@@ -4,17 +4,16 @@ include 'koneksi.php';
 $tahunPost = $_POST['tahun'];
 
 if (isset($tahunPost) || $tahunPost != '') {
+    $tahun = $tahunPost;
+} else {
     $th = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT nama_tahun FROM tahun ORDER BY nama_tahun DESC LIMIT 1 "));
     $tahun = $th['nama_tahun'];
-} else {
-    $tahun = $tahunPost;
 }
 $sql = mysqli_query($sentral, "SELECT kode_pengajuan, lembaga, at FROM pengajuan WHERE tahun = '$tahun' AND cair = 1 ORDER BY at DESC ");
 
 ?>
 
-<table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0"
-    width="100%">
+<table class="table table-striped table-bordered table-hover table-sm" id="example-table" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>No</th>
