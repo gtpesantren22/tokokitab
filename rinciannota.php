@@ -89,16 +89,23 @@ $mitradata = mysqli_query($sentral, "SELECT order_mitra.id_mitra, mitra.nama FRO
                         $sql = mysqli_query($sentral, "SELECT * FROM order_mitra WHERE kode_pengajuan = '$kode_pengajuan' AND id_mitra = '$mitras->id_mitra' ");
                         while ($data = mysqli_fetch_assoc($sql)) {
                             $kode = $data['kode'];
-                            $rab = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT * FROM rab WHERE kode = '$kode' "));
+                            // $rab = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT * FROM rab WHERE kode = '$kode' "));
                             $rincian = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT * FROM realis WHERE kode_pengajuan = '$kode_pengajuan' AND kode = '$kode' "));
                             $total += $rincian['nominal'];
+                            $parts = explode(" - @ ", $rincian['ket']);
+                            $nama = $parts[0]; // WK.SAR_Tisu
+                            $jumlahHarga = explode(" x ", $parts[1]);
+                            $qtySatuan = explode(" ", trim($jumlahHarga[0]), 2);
+                            $qty = $qtySatuan[0] ?? 0;
+                            $satuan = $qtySatuan[1] ?? "";
+
                         ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $rab['nama']; ?></td>
+                                <td><?= $nama; ?></td>
                                 <td><?= $rincian['vol']; ?></td>
-                                <td><?= rupiah($rab['harga_satuan']); ?></td>
-                                <td><?= $rab['satuan']; ?></td>
+                                <td><?= $jumlahHarga[1]; ?></td>
+                                <td><?= $satuan ? $satuan : ''; ?></td>
                                 <td><?= rupiah($rincian['nominal']); ?></td>
                             </tr>
                         <?php } ?>
