@@ -29,36 +29,41 @@ include 'footer.php';
 
 <script>
     $(document).ready(function() {
-        $.ajax({
-            type: "POST",
-            url: "datanota.php",
-            data: {
-                tahun: '',
-            },
-            dataType: 'html',
-            success: function(data) {
-                $('#hasil-data').html(data);
-            },
-            error: function(xhr, status, error) {
-                alert(xhr.responseText);
-            }
+        loadData()
+
+        function loadData(tahun = '') {
+            $.ajax({
+                type: "POST",
+                url: "datanota.php",
+                data: {
+                    tahun: tahun
+                },
+                dataType: "html",
+                success: function(data) {
+                    $("#hasil-data").html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", error);
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+        $('#select-tahun').on('change', function() {
+            var tahun = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "datanota.php",
+                data: {
+                    tahun: tahun,
+                },
+                dataType: 'html',
+                success: function(data) {
+                    $('#hasil-data').html(data);
+                },
+                error: function(xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
         })
     });
-    $('#select-tahun').on('change', function() {
-        var tahun = $(this).val();
-        $.ajax({
-            type: "POST",
-            url: "datanota.php",
-            data: {
-                tahun: tahun,
-            },
-            dataType: 'html',
-            success: function(data) {
-                $('#hasil-data').html(data);
-            },
-            error: function(xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        })
-    })
 </script>

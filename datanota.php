@@ -3,7 +3,7 @@ include 'koneksi.php';
 
 $tahunPost = $_POST['tahun'];
 
-if (isset($tahunPost) || $tahunPost != '') {
+if (isset($tahunPost) && $tahunPost != '') {
     $tahun = $tahunPost;
 } else {
     $th = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT nama_tahun FROM tahun ORDER BY nama_tahun DESC LIMIT 1 "));
