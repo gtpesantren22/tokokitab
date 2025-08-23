@@ -94,13 +94,21 @@ $mitra = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT nama FROM mitra WHERE
                         $rab = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT * FROM rab WHERE kode = '$kode' "));
                         $rincian = mysqli_fetch_assoc(mysqli_query($sentral, "SELECT * FROM realis WHERE kode_pengajuan = '$kode_pengajuan' AND kode = '$kode' "));
                         $total += $rincian['nominal'];
+
+                        $parts = explode(" - @ ", $rincian['ket']);
+                        $nama = $parts[0]; // WK.SAR_Tisu
+                        $jumlahHarga = explode(" x ", $parts[1]);
+                        $qtySatuan = explode(" ", trim($jumlahHarga[0]), 2);
+                        $qty = $qtySatuan[0] ?? 0;
+                        $satuan = $qtySatuan[1] ?? "";
+
                     ?>
                         <tr>
                             <td class="text-center"><?= $no++; ?>.</td>
-                            <td><?= $rab['nama']; ?></td>
+                            <td><?= $nama ?></td>
                             <td class="text-center"><?= $rincian['vol']; ?></td>
-                            <td><?= rupiah($rab['harga_satuan']); ?></td>
-                            <td><?= $rab['satuan']; ?></td>
+                            <td><?= $jumlahHarga[1]; ?></td>
+                            <td><?= $satuan ? $satuan : ''; ?></td>
                             <td><?= rupiah($rincian['nominal']); ?></td>
                         </tr>
                     <?php } ?>
